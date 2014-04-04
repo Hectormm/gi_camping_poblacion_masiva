@@ -1,2 +1,4 @@
-gi_camping_poblacion_masiva
-===========================
+Gestión de la Información
+=========================
+
+Población Masiva de la BD.
