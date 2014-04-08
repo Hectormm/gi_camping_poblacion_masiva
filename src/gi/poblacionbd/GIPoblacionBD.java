@@ -24,6 +24,7 @@ import java.util.Locale;
 public class GIPoblacionBD {
 
     private static ArrayList<String> nombres;
+    private static ArrayList<String> apellidos;
     /**
      * @param args the command line arguments
      * @throws java.io.UnsupportedEncodingException
@@ -39,7 +40,14 @@ public class GIPoblacionBD {
         //leemos un fichero
         ArrayList<String[]>f = le.LeerFicheroCsv("nombresHombresEsp.csv");
         
+        ArrayList<String[]>a = le.LeerFicheroCsv("apellidosEspanyoles.csv");
+        
         double totalInserciones = generar(f, 586450/2);
+        
+        double totalApellidos = generar(a, 655000);
+        
+        a = le.LeerFicheroCsv("apellidosExtranjeros.csv");
+       totalApellidos += generar(a, 594000);
         
         f = le.LeerFicheroCsv("nombresMujeresEsp.csv");
        totalInserciones += generar(f, 605168/2);
@@ -50,7 +58,7 @@ public class GIPoblacionBD {
         f = le.LeerFicheroCsv("nombresHombresExt.csv");
         totalInserciones += generar(f, 32833);
         
-        insertar(totalInserciones);
+        insertar(totalInserciones, totalApellidos);
         
     }
     
@@ -61,6 +69,7 @@ public class GIPoblacionBD {
         double inserciones, total = 0;
         float porcentaje;
         String nombre;
+        String apellido;
         
         for(int i = 0; i < totalNombres; i++){
             
@@ -83,7 +92,7 @@ public class GIPoblacionBD {
         return total;
     }
     
-    public static void insertar(double totalInserciones) throws FileNotFoundException, UnsupportedEncodingException, IOException{
+    public static void insertar(double totalInserciones, double totalApellidos) throws FileNotFoundException, UnsupportedEncodingException, IOException{
         int randomNum;
         double cant;
         double totalInserciones2 = totalInserciones;
