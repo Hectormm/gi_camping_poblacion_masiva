@@ -39,10 +39,16 @@ public class GIPoblacionBD {
         //leemos un fichero
         ArrayList<String[]>f = le.LeerFicheroCsv("nombresHombresEsp.csv");
         
-        double totalInserciones = generar(f, 586450);
+        double totalInserciones = generar(f, 586450/2);
         
         f = le.LeerFicheroCsv("nombresMujeresEsp.csv");
-        totalInserciones += generar(f, 605168);
+       totalInserciones += generar(f, 605168/2);
+        
+        f = le.LeerFicheroCsv("nombresMujeresExt.csv");
+        totalInserciones += generar(f, 35095);
+        
+        f = le.LeerFicheroCsv("nombresHombresExt.csv");
+        totalInserciones += generar(f, 32833);
         
         insertar(totalInserciones);
         
@@ -65,8 +71,7 @@ public class GIPoblacionBD {
             
             nombre = f.get(i)[0];
             
-            System.out.print(nombre + " -> ");
-            System.out.printf("%.0f\n", inserciones);
+           
             
             for(int j=0; j<inserciones; j++)
                 nombres.add(nombre);
