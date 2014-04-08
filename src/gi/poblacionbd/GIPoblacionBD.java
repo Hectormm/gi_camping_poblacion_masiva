@@ -6,16 +6,16 @@
 
 package gi.poblacionbd;
 
-import static com.sun.org.apache.xalan.internal.lib.ExsltDynamic.map;
 import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.OutputStream;
+import java.io.OutputStreamWriter;
 import java.io.UnsupportedEncodingException;
 import java.text.NumberFormat;
 import java.text.ParseException;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.Locale;
-import java.util.Random;
 
 /**
  *
@@ -65,9 +65,6 @@ public class GIPoblacionBD {
             
             nombre = f.get(i)[0];
             
-            System.out.print(nombre + " -> ");
-            System.out.printf("%.0f\n", inserciones);
-            
             for(int j=0; j<inserciones; j++)
                 nombres.add(nombre);
             
@@ -80,17 +77,22 @@ public class GIPoblacionBD {
         return total;
     }
     
-    public static void insertar(double totalInserciones){
+    public static void insertar(double totalInserciones) throws FileNotFoundException, UnsupportedEncodingException, IOException{
         int randomNum;
         double cant;
         double totalInserciones2 = totalInserciones;
         
-        for(int i=0; i< totalInserciones; i++){
-            randomNum = (int)(Math.random()*totalInserciones2); 
+        try (OutputStream fout = new FileOutputStream("salida.csv"); 
+                OutputStreamWriter out = new OutputStreamWriter(fout, "UTF8")) {
             
-            System.out.println(nombres.get(randomNum) + " " + totalInserciones2);
-            nombres.remove(randomNum);
-            totalInserciones2--;
+            for(int i=0; i< totalInserciones; i++){
+                randomNum = (int)(Math.random()*totalInserciones2); 
+
+                out.write(nombres.get(randomNum)+";Martinez Rodriguez\n");
+                
+                nombres.remove(randomNum);
+                totalInserciones2--;
+            }
         }
     }
     
