@@ -71,11 +71,6 @@ public class GIPoblacionBD {
             
             nombre = f.get(i)[0];
             
-<<<<<<< HEAD
-           
-            
-=======
->>>>>>> f4ec4da32635269cb8f0f8badb35534e129081d2
             for(int j=0; j<inserciones; j++)
                 nombres.add(nombre);
             
