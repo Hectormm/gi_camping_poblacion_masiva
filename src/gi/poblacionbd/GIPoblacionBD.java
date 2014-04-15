@@ -68,9 +68,8 @@ public class GIPoblacionBD {
         }
         
         ArrayList<String[]>c = le.LeerFicheroCsv("calles.csv");
-       // c = le.LeerFicheroCsv("callesExt.csv");
         
-          int numerocalles = c.size();
+        int numerocalles = c.size();
         String calle;
         
         for(int i = 0; i < numerocalles; i++){
@@ -106,7 +105,7 @@ public class GIPoblacionBD {
         double totalApellidos = generar(a, 655000, nom);
         
         a = le.LeerFicheroCsv("apellidosExtranjeros.csv");
-       totalApellidos += generar(a, 594000, nom);
+       totalApellidos += generar(a, 59400, nom);
         
         insertar(totalInserciones, totalApellidos);
         
@@ -160,13 +159,14 @@ public class GIPoblacionBD {
         double totalApellidos2 = totalApellidos;
         int k=0;
 
+        int totaldnis= dnis.size();
         
         try (OutputStream fout = new FileOutputStream("salida.csv"); 
                 OutputStreamWriter out = new OutputStreamWriter(fout, "UTF8")) {
             
-            for(int i=0; i< totalInserciones; i++){
+            for(int i=0; i< totaldnis; i++){
                 randomNum = (int)(Math.random()*totalInserciones2);
-                randomNum2= (int)(Math.random()*totalApellidos2);
+                randomNum2 = (int)(Math.random()*totalApellidos2);
                
                String nomFinal = nombres.get(randomNum);
                char l0=nomFinal.charAt(0);
@@ -177,12 +177,17 @@ public class GIPoblacionBD {
                 out.write(dnis.get(k)+";"+nomFinal+";"+apellidoFinal+";"+calles.get(k)+";"+telefonos.get(k)+";"+l0+l1+"@gmail.com"+"\n");
                 
                 nombres.remove(randomNum);
-                apellidos.remove(randomNum);
+                apellidos.remove(randomNum2);
                 k++;
                 totalInserciones2--;
                 totalApellidos2--;
             }
         }
+        
+        System.out.println("k="+k);
+        System.out.println("totalInserciones2="+totalInserciones2+" de "+totalInserciones);
+        System.out.println("totalApellidos2="+totalApellidos2+" de "+totalApellidos);
+        
     }
     
 }
