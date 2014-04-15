@@ -68,7 +68,7 @@ public class GIPoblacionBD {
         }
         
         ArrayList<String[]>c = le.LeerFicheroCsv("calles.csv");
-        c = le.LeerFicheroCsv("callesExt.csv");
+       // c = le.LeerFicheroCsv("callesExt.csv");
         
           int numerocalles = c.size();
         String calle;
@@ -154,9 +154,10 @@ public class GIPoblacionBD {
     }
     
     public static void insertar(double totalInserciones, double totalApellidos) throws FileNotFoundException, UnsupportedEncodingException, IOException{
-        int randomNum;
+        int randomNum, randomNum2;
         double cant;
         double totalInserciones2 = totalInserciones;
+        double totalApellidos2 = totalApellidos;
         int k=0;
 
         
@@ -165,11 +166,12 @@ public class GIPoblacionBD {
             
             for(int i=0; i< totalInserciones; i++){
                 randomNum = (int)(Math.random()*totalInserciones2);
+                randomNum2= (int)(Math.random()*totalApellidos2);
                
                String nomFinal = nombres.get(randomNum);
                char l0=nomFinal.charAt(0);
                
-               String apellidoFinal = apellidos.get(randomNum);
+               String apellidoFinal = apellidos.get(randomNum2);
                char l1=apellidoFinal.charAt(0);
                 
                 out.write(dnis.get(k)+";"+nomFinal+";"+apellidoFinal+";"+calles.get(k)+";"+telefonos.get(k)+";"+l0+l1+"@gmail.com"+"\n");
@@ -178,7 +180,7 @@ public class GIPoblacionBD {
                 apellidos.remove(randomNum);
                 k++;
                 totalInserciones2--;
- 
+                totalApellidos2--;
             }
         }
     }
