@@ -1,3 +1,7 @@
+# Archivos de excel.
+*.csv
+
+
 #################
 ## Eclipse
 #################
